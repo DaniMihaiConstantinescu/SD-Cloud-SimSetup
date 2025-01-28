@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 const setupSchema = new mongoose.Schema(
     {
         carCode: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Car",
             required: true,
-            trim: true,
         },
         tirePressures: {
             fl: { type: Number, required: true },
