@@ -10,8 +10,13 @@ app.use(express.json());
 connectDB();
 
 const setupRouter = require("./routes/setup");
-app.use("/setup", setupRouter);
+const trackRouter = require("./routes/track");
+const carRouter = require("./routes/car");
+
+app.use("/setups", setupRouter);
+app.use("/tracks", trackRouter);
+app.use("/cars", carRouter);
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });

@@ -10,12 +10,6 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("Connected to MongoDB successfully!");
-
-    const collections = await mongoose.connection.db
-      .listCollections()
-      .toArray();
-    console.log("Collections in the database: ", collections);
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
     process.exit(1);
