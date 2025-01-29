@@ -1,11 +1,15 @@
 "use client";
 import { Button } from "./ui/button"
-import SelectWithLoading, { SelectOption } from "./select-with-loading"
+import SelectWithLoading from "./select-with-loading"
 import { useEffect, useState } from "react";
 import { useCommonHook } from "@/hooks/useCommonHook";
+import { SelectOption, Setup } from "@/common/types";
 
-
-export default function SelectBar() {
+interface SelectBarProps {
+    setIsLoading: (isLoading: boolean) => void;
+    setSetups: (setups: Setup[]) => void;
+}
+export default function SelectBar({ setIsLoading, setSetups }: SelectBarProps) {
 
     const { getTrackList, getCarList, getSetups } = useCommonHook();
     const [trackOptions, setTrackOptions] = useState<SelectOption[] | undefined>();
@@ -13,6 +17,13 @@ export default function SelectBar() {
 
     const [selectedTrack, setSelectedTrack] = useState<string>();
     const [selectedCar, setSelectedCar] = useState<string>();
+
+    const handleFind = async () => {
+        setIsLoading(true);
+        const setups = await getSetups(selectedTrack, selectedCar);
+        setSetups(setups);
+        setIsLoading(false);
+    }
 
     useEffect(() => {
         const fetchTrackList = async () => {
@@ -47,7 +58,7 @@ export default function SelectBar() {
             />
 
             <Button
-                onClick={() => getSetups(selectedTrack, selectedCar)}
+                onClick={handleFind}
                 disabled={!selectedTrack}
                 className="w-full md:w-fit bg-sd-secondary hover:bg-sd-secondaryHover font-bold text-black text-2xl px-8 py-6 rounded-sm">
                 Find Setup

@@ -8,11 +8,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import SelectSkeleton from "./skeletons/select-skeleton";
-
-export interface SelectOption {
-    value: string;
-    label: string;
-}
+import { SelectOption } from "@/common/types";
 
 interface SelectWithLoadingProps {
     placeholder?: string;

@@ -67,6 +67,15 @@ export default {
 		fontFamily: {
 			kaisei: "var(--font-kaisei-decol)",
 		},
+		animation: {
+			scaleUp: 'scaleUp 1s linear infinite',
+		  },
+		keyframes: {
+			scaleUp: {
+				'20%': { transform: 'scaleY(1.5)', backgroundColor: '#4B5563' }, 
+				'40%': { transform: 'scaleY(1)', backgroundColor: '#9CA3AF' }, 
+			},
+		},
   	}
   },
   plugins: [require("tailwindcss-animate")],
