@@ -63,13 +63,13 @@ export default function SelectBar({ setIsLoading, setSetups }: SelectBarProps) {
             <Button
                 onClick={handleFind}
                 disabled={!selectedTrack}
-                className="w-full md:w-fit bg-sd-secondary hover:bg-sd-secondaryHover font-bold text-black text-2xl px-8 py-6 rounded-sm">
+                className="w-full lg:w-fit bg-sd-secondary hover:bg-sd-secondaryHover font-bold text-black text-2xl px-8 py-6 rounded-sm">
                 Find Setup
             </Button>
             <Dialog>
                 <DialogTrigger asChild>
                     <Button
-                        className="w-full md:w-fit bg-sd-secondary hover:bg-sd-secondaryHover font-bold text-black text-2xl px-8 py-6 rounded-sm">
+                        className="w-full lg:w-fit bg-sd-secondary hover:bg-sd-secondaryHover font-bold text-black text-2xl px-8 py-6 rounded-sm">
                         <Plus size={48} />
                         Add Setup
                     </Button>

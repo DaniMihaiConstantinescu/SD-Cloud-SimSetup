@@ -9,6 +9,7 @@ export interface Setup {
         _id?: string;
         name?: string;
     };
+    trackCode?: string;
     tirePressures?: {
         fl?: number;
         fr?: number;
