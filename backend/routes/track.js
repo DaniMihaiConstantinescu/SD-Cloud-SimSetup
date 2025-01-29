@@ -29,6 +29,7 @@ router.get("/:id", (req, res) => {
 
 router.get("/:id/setups", (req, res) => {
     const { id } = req.params;
+    const carId = req.query.car;
 
     Track.findById(id)
         .populate({
@@ -40,15 +41,22 @@ router.get("/:id/setups", (req, res) => {
         })
         .then((track) => {
             if (!track) {
-                res.status(404).json({ error: "Track not found" });
-            } else {
-                const setupsWithCarName = track.setups.map((setup) => ({
-                    ...setup.toObject(),
-                    carName: setup.carCode.name,
-                }));
-
-                res.json(setupsWithCarName);
+                return res.status(404).json({ error: "Track not found" });
             }
+
+            let setups = track.setups;
+            if (carId) {
+                setups = setups.filter(
+                    (setup) => setup.carCode._id.toString() === carId
+                );
+            }
+
+            const setupsWithCarName = setups.map((setup) => ({
+                ...setup.toObject(),
+                carName: setup.carCode.name,
+            }));
+
+            res.json(setupsWithCarName);
         })
         .catch((error) => {
             res.status(500).json({

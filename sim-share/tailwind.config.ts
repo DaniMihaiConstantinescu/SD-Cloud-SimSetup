@@ -10,6 +10,11 @@ export default {
   theme: {
   	extend: {
   		colors: {
+			sd: {
+				primary: "#D24F27",
+				secondary: "#25B865",
+				secondaryHover: "#0F9F4E",
+			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -55,7 +60,13 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		backgroundImage: {
+			'custom-gradient': 'linear-gradient(to bottom, #0F0C29 0%, #0F0C29 65%, #302B63 100%)',
+		},
+		fontFamily: {
+			kaisei: "var(--font-kaisei-decol)",
+		},
   	}
   },
   plugins: [require("tailwindcss-animate")],
