@@ -1,3 +1,5 @@
+import { Setup } from "@/common/types";
+
 export const useCommonHook = () => {
 
     const getTrackList = async () => {
@@ -27,17 +29,38 @@ export const useCommonHook = () => {
         if (!trackId) {
             return [];
         }
-        
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tracks/${trackId}/setups${carId ? `?car=${carId}` : ""}`);
         const data = await response.json();
-        console.log(data);
         
         return data;
     }
 
+    const addSetup = async (setup: Setup) => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/setups/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(setup),
+            });
+    
+            if (!response.ok) {
+                return false;
+            }
+    
+            return true;
+        } catch (error) {
+            console.error("Error adding setup:", error);
+            return false;
+        }
+    };
+    
+
     return {
         getTrackList,
         getCarList,
-        getSetups
+        getSetups,
+        addSetup
     }
 }

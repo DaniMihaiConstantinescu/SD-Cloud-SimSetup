@@ -16,7 +16,7 @@ export default function Home() {
       "px-6 md:px-24 py-24 md:py-36"
     )}
     >
-      <h1 className="text-7xl font-bold font-kaisei text-sd-primary">SIM SHARE</h1>
+      <h1 className="text-7xl font-bold font-kaisei text-white">SIM SHARE</h1>
       <SelectBar setSetups={setSetups} setIsLoading={setIsLoading} />
       <SetupTable isLoading={isLoading} setups={setups} />
     </main>

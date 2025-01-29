@@ -3,7 +3,9 @@ import SetupForm from "./setup-form";
 import { DialogContent, DialogTitle } from "./ui/dialog";
 import AddFormSkeleton from "./skeletons/add-skeleton";
 import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useCommonHook } from "@/hooks/useCommonHook";
+import { useRouter } from "next/navigation";
 
 interface AddDialogProps {
     carOptions: SelectOption[] | undefined
@@ -12,7 +14,9 @@ interface AddDialogProps {
 
 export default function AddDialog({ carOptions, trackOptions }: AddDialogProps) {
 
+    const router = useRouter();
     const { toast } = useToast()
+    const { addSetup } = useCommonHook();
     const setupOptions = [{
         value: "race",
         label: "Race",
@@ -24,15 +28,28 @@ export default function AddDialog({ carOptions, trackOptions }: AddDialogProps) 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
 
-    const hadleSetupSubmit = (setup: Setup) => {
+    const hadleSetupSubmit = async (setup: Setup) => {
 
         if (!setup.carCode || !setup.trackCode || !setup.setupType) {
             toast({
                 variant: "destructive",
-                title: "Please select car, track and setup type"
+                description: "Please select car, track and setup type"
             });
         } else {
-            console.log(setup);
+            setIsLoading(true);
+            const result = await addSetup(setup);
+            if (result) {
+                toast({
+                    description: "Your setup was added successfully"
+                });
+                router.refresh();
+            } else {
+                toast({
+                    variant: "destructive",
+                    description: "An error occurred while adding the setup"
+                });
+            }
+            setIsLoading(false);
         }
 
     }
@@ -46,6 +63,7 @@ export default function AddDialog({ carOptions, trackOptions }: AddDialogProps) 
                         carOptions={carOptions}
                         trackOptions={trackOptions}
                         setupTypeOptions={setupOptions}
+                        isLoading={isLoading}
                         onSubmit={hadleSetupSubmit}
                     />
                     : <AddFormSkeleton />

@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
 
 router.post("/add", async (req, res) => {
     const {
-        trackId,
+        trackCode,
         carCode,
         tirePressures,
         aero,
@@ -20,6 +20,7 @@ router.post("/add", async (req, res) => {
         toe,
         setupType,
     } = req.body;
+
 
     const newSetup = new Setup({
         carCode,
@@ -35,7 +36,8 @@ router.post("/add", async (req, res) => {
 
     try {
         const savedSetup = await newSetup.save();
-        const track = await Track.findById(trackId);
+        const track = await Track.findById(trackCode);
+
         if (!track) {
             return res.status(404).send("Track not found");
         }
