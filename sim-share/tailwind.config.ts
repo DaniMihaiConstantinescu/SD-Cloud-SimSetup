@@ -64,6 +64,9 @@ export default {
 		backgroundImage: {
 			'custom-gradient': 'linear-gradient(to bottom, #0F0C29 0%, #0F0C29 65%, #302B63 100%)',
 		},
+		maxHeight: {
+			"3/4": "75vh", 
+		},
 		fontFamily: {
 			kaisei: "var(--font-kaisei-decol)",
 		},

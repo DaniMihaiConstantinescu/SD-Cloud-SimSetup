@@ -74,7 +74,7 @@ export default function SelectBar({ setIsLoading, setSetups }: SelectBarProps) {
                         Add Setup
                     </Button>
                 </DialogTrigger>
-                <AddDialog />
+                <AddDialog carOptions={carOptions} trackOptions={trackOptions} />
             </Dialog>
 
         </div>

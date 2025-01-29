@@ -1,10 +1,37 @@
+import { SelectOption } from "@/common/types";
+import SetupForm from "./setup-form";
 import { DialogContent, DialogTitle } from "./ui/dialog";
+import AddFormSkeleton from "./skeletons/add-skeleton";
 
-export default function AddDialog() {
+interface AddDialogProps {
+    carOptions: SelectOption[] | undefined
+    trackOptions: SelectOption[] | undefined
+}
+
+export default function AddDialog({ carOptions, trackOptions }: AddDialogProps) {
+
+    const setupOptions = [{
+        value: "race",
+        label: "Race",
+    }, {
+        value: "qualy",
+        label: "Qualy",
+    }]
+
     return (
         <DialogContent>
-            <DialogTitle>Add your Setup</DialogTitle>
-            Aadadada
+            <DialogTitle>Share your Setup</DialogTitle>
+            {
+                carOptions && trackOptions
+                    ? <SetupForm
+                        carOptions={carOptions}
+                        trackOptions={trackOptions}
+                        setupTypeOptions={setupOptions}
+                        onSubmit={(setup) => { console.log(setup) }}
+                    />
+                    : <AddFormSkeleton />
+            }
+
         </DialogContent>
     )
 }
