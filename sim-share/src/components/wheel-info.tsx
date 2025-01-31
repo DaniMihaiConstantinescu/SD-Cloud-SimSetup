@@ -11,8 +11,8 @@ interface WheelInfoProps {
 export default function WheelInfo({ label, fl, fr, rl, rr }: WheelInfoProps) {
     return (
         <div className="w-full flex flex-col gap-2 text-2xl items-center">
-            <h3 className="text-lg font-bold text-black">{label}</h3>
-            <div className="grid grid-cols-2 w-full p-6 gap-x-16 gap-y-8 rounded-lg border border-neutral-500">
+            <h3 className="text-lg font-bold text-neutral-800">{label}</h3>
+            <div className="grid grid-cols-2 w-full p-4 gap-x-12 gap-y-6 rounded-lg border border-neutral-600 shadow-md bg-white">
                 <TyreInfo label="FL" value={fl} />
                 <TyreInfo label="FR" value={fr} />
                 <TyreInfo label="RL" value={rl} />
