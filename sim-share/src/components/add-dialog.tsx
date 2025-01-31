@@ -1,11 +1,11 @@
+"use client";
 import { SelectOption, Setup } from "@/common/types";
 import SetupForm from "./setup-form";
 import { DialogContent, DialogTitle } from "./ui/dialog";
 import AddFormSkeleton from "./skeletons/add-skeleton";
 import { useToast } from "@/hooks/use-toast";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useCommonHook } from "@/hooks/useCommonHook";
-import { useRouter } from "next/navigation";
 
 interface AddDialogProps {
     carOptions: SelectOption[] | undefined
@@ -14,7 +14,6 @@ interface AddDialogProps {
 
 export default function AddDialog({ carOptions, trackOptions }: AddDialogProps) {
 
-    const router = useRouter();
     const { toast } = useToast()
     const { addSetup } = useCommonHook();
     const setupOptions = [{
@@ -42,7 +41,6 @@ export default function AddDialog({ carOptions, trackOptions }: AddDialogProps) 
                 toast({
                     description: "Your setup was added successfully"
                 });
-                router.refresh();
             } else {
                 toast({
                     variant: "destructive",
